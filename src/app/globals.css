@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-secondary: #0A0A0C;
+  --color-accent: #0050FF;
+  --color-highlight: #00D6FF;
+}
+
+body {
+  background-color: var(--color-background);
+  color: white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
