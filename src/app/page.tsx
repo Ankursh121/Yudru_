@@ -76,17 +76,17 @@ export default function Home() {
           <section className="h-screen flex flex-col items-center justify-center pt-20">
             <FadeInText>
               <Item>
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white/90 mb-2 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-2 drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
                   Built for <span className="bg-gradient-to-t from-highlight to-white bg-clip-text text-transparent">Excellence.</span>
                 </h1>
               </Item>
               <Item>
-                <p className="text-2xl md:text-3xl text-white/90 font-light mb-6 tracking-tight">
+                <p className="text-2xl md:text-3xl text-white font-medium mb-6 tracking-tight drop-shadow-[0_2px_16px_rgba(0,0,0,0.8)]">
                   Engineered for Innovation.
                 </p>
               </Item>
               <Item>
-                <p className="text-sm md:text-base text-white/60 tracking-wide max-w-2xl text-center leading-relaxed">
+                <p className="text-sm md:text-base text-zinc-100 tracking-wide max-w-2xl text-center leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] bg-black/10 px-4 py-2 rounded-full backdrop-blur-[2px]">
                   Pioneering indigenous drone technology solutions for monitoring, logistics, and industrial applications. From R&D to training, we deliver excellence.
                 </p>
               </Item>
@@ -97,12 +97,12 @@ export default function Home() {
           <section className="h-[150vh] flex items-center justify-center w-full relative z-20">
             <FadeInText side="center">
               <Item>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white/90 mb-4 text-center drop-shadow-sm">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 text-center drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
                   Engineered for <span className="bg-gradient-to-t from-highlight to-white/90 bg-clip-text text-transparent">perfection.</span>
                 </h2>
               </Item>
               <Item>
-                <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
+                <p className="text-lg text-zinc-100 text-center max-w-2xl mx-auto mb-16 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] bg-black/10 px-6 py-2 rounded-full backdrop-blur-[2px]">
                   Advanced aerodynamics meet precision-built components. Every element optimized for stability, efficiency, and control.
                 </p>
               </Item>

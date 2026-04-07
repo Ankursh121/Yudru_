@@ -27,7 +27,7 @@ export default function ScrollCanvas() {
     
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
-      img.src = `/frames_crazy/ezgif-frame-${pad(i, 3)}.jpg`;
+      img.src = `/Black_drone_frames/ezgif-frame-${pad(i, 3)}.jpg`;
       const handleLoad = () => {
         localCount++;
         // Throttle state updates for performance
@@ -122,8 +122,8 @@ export default function ScrollCanvas() {
           className="w-full h-full block" 
           style={{ filter: "contrast(1.4) saturate(1.15) brightness(0.9)" }} 
         />
-        {/* Vignette overlay to ensure absolute seamless edge blending into black */}
-        <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_20%,#000000_90%)]" />
+        {/* Vignette overlay to ensure absolute seamless edge blending into black and improve text readability */}
+        <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.6)_60%,#000000_100%)]" />
       </div>
     </>
   );

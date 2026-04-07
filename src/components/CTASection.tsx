@@ -7,11 +7,11 @@ export default function CTASection() {
       {/* Subtle background glow mimicking the design */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#00e5ff] opacity-5 blur-[120px] pointer-events-none rounded-full" />
       
-      <h2 className="text-5xl md:text-6xl font-bold tracking-tighter text-white mb-6 text-center relative z-10 drop-shadow-md">
+      <h2 className="text-5xl md:text-6xl font-bold tracking-tighter text-white mb-6 text-center relative z-10 drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
         Ready to <span className="bg-gradient-to-t from-[#00e5ff] to-white/90 bg-clip-text text-transparent">Take Flight?</span>
       </h2>
       
-      <p className="text-white/60 text-[17px] leading-relaxed text-center max-w-3xl mx-auto mb-16 relative z-10 font-medium">
+      <p className="text-zinc-100 text-[17px] leading-relaxed text-center max-w-3xl mx-auto mb-16 relative z-10 font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] bg-black/10 px-8 py-3 rounded-full backdrop-blur-[2px]">
         Whether you're an enterprise, research organization, or academic institution,
         we're here to deliver tailored drone solutions for your needs.
       </p>

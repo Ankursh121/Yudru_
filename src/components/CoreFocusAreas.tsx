@@ -37,12 +37,12 @@ export default function CoreFocusAreas() {
       </div>
       
       {/* Heading */}
-      <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-4 uppercase drop-shadow-md">
+      <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-4 uppercase drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
         Core Focus Areas
       </h2>
       
       {/* Subheading */}
-      <p className="text-white/60 text-center max-w-2xl text-[15px] md:text-lg mb-16 leading-relaxed">
+      <p className="text-zinc-100 text-center max-w-2xl text-[15px] md:text-lg mb-16 leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] bg-black/10 px-6 py-2 rounded-full backdrop-blur-[2px]">
         Delivering excellence across the complete drone technology ecosystem, from research to deployment.
       </p>
 
@@ -57,7 +57,7 @@ export default function CoreFocusAreas() {
             
             <h3 className="text-lg font-bold text-white mb-2 tracking-tight drop-shadow-sm">{area.title}</h3>
             
-            <p className="text-white/50 text-sm leading-relaxed mb-6 flex-grow">
+            <p className="text-zinc-300 text-sm leading-relaxed mb-6 flex-grow drop-shadow-sm">
               {area.desc}
             </p>
             
