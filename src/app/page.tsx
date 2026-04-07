@@ -67,9 +67,7 @@ export default function Home() {
       
       {/* Scrollable container with sticky canvas on desktop, native stack on mobile */}
       <div className="relative w-full h-auto md:h-[600vh]">
-        <div className="hidden md:block">
-          <ScrollCanvas />
-        </div>
+        <ScrollCanvas />
         
         {/* Text Overlays Layer */}
         <div className="relative md:absolute top-0 left-0 w-full h-full z-10 pointer-events-none flex flex-col bg-black md:bg-transparent">
