@@ -66,7 +66,7 @@ export default function Home() {
       <Navbar />
       
       {/* Scrollable container with sticky canvas on desktop, native stack on mobile */}
-      <div className="relative w-full md:h-[600vh]">
+      <div className="relative w-full h-auto md:h-[600vh]">
         <div className="hidden md:block">
           <ScrollCanvas />
         </div>
@@ -96,7 +96,7 @@ export default function Home() {
           </section>
 
           {/* ENGINEERING */}
-          <section className="py-16 min-h-[50vh] md:h-[150vh] flex items-center justify-center w-full relative z-20">
+          <section className="py-16 md:py-0 h-auto md:h-[150vh] flex items-center justify-center w-full relative z-20">
             <FadeInText side="center">
               <Item>
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 text-center drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
@@ -117,7 +117,7 @@ export default function Home() {
           </section>
 
           {/* SCORE FOCUS AREAS */}
-          <section className="py-16 min-h-[50vh] md:h-[150vh] flex items-center justify-center w-full relative z-20">
+          <section className="py-16 md:py-0 h-auto md:h-[150vh] flex items-center justify-center w-full relative z-20">
             <FadeInText side="center">
               <Item>
                 <div className="w-full">
@@ -128,7 +128,7 @@ export default function Home() {
           </section>
 
           {/* READY TO TAKE FLIGHT / CTA */}
-          <section className="py-16 min-h-[50vh] md:h-[240vh] flex items-center justify-center pb-[10vh] w-full relative z-20">
+          <section className="py-16 md:py-0 h-auto md:h-[240vh] flex items-center justify-center md:pb-[10vh] w-full relative z-20">
             <FadeInText side="center">
               <Item>
                 <div className="w-full">
