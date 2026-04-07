@@ -58,10 +58,10 @@ export default function Navbar() {
           
           {/* Mobile Menu Toggle button */}
           <button 
-            className="xl:hidden text-white hover:text-[#00e5ff] transition-colors p-2 z-50 focus:outline-none"
+            className="xl:hidden text-white hover:text-[#00e5ff] transition-colors p-2 z-50 focus:outline-none drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
           </button>
         </div>
       </nav>

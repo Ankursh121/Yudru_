@@ -7,6 +7,7 @@ import CoreFocusAreas from "@/components/CoreFocusAreas";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,20 +25,33 @@ const itemVariants = {
     opacity: 0, 
     y: 50, 
     filter: "blur(12px)",
-    transition: { duration: 0.6, ease: "easeOut" as const }
   },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1, 
     y: 0, 
     filter: "blur(0px)",
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as const } // Classic Apple-tier cubic bezier
-  }
+    transition: isMobile 
+      ? { duration: 0.4, ease: "easeOut" as any } // Blazingly fast, snappy fade-in for mobile thumbs
+      : { duration: 1.2, ease: [0.16, 1, 0.3, 1] as any } // Cinematic 1.2s lag delay curve for Desktop trackpads
+  })
 };
 
+// Internal hook securely avoiding hydration failures to extract device dimensions
+function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
+
 function FadeInText({ children, side = "center" }: { children: React.ReactNode, side?: "left" | "right" | "center" }) {
-  let alignClass = "text-center mx-auto items-center px-4 md:px-0";
-  if (side === "left") alignClass = "text-center md:text-left mx-6 md:mx-0 md:ml-[10%] max-w-xl items-center md:items-start";
-  if (side === "right") alignClass = "text-center md:text-right mx-6 md:mx-0 md:mr-[10%] max-w-xl md:ml-auto items-center md:items-end";
+  let alignClass = "text-center mx-auto items-center px-6 max-w-xl w-full"; // Natively centered baseline for mobile
+  if (side === "left") alignClass = "text-center md:text-left mx-auto md:ml-[10%] px-6 md:px-0 max-w-xl items-center md:items-start w-full";
+  if (side === "right") alignClass = "text-center md:text-right mx-auto md:mr-[10%] px-6 md:px-0 max-w-xl md:ml-auto items-center md:items-end w-full";
 
   return (
     <motion.div
@@ -53,8 +67,9 @@ function FadeInText({ children, side = "center" }: { children: React.ReactNode, 
 }
 
 function Item({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const isMobile = useMobile();
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <motion.div custom={isMobile} variants={itemVariants} className={className}>
       {children}
     </motion.div>
   );
