@@ -121,15 +121,14 @@ export default function Home() {
       {/* 
         ##############################################################
         LAPTOP DOM BRANCH
-        Uses the exact pristine native h-[600vh] math and absolute layers.
         ##############################################################
       */}
-      <div className="hidden md:block relative w-full h-[600vh] bg-black">
-        <ScrollCanvas /> {/* Native Sticky logic flawlessly adhered to the 600vh parent */}
+      <div className="hidden md:block relative w-full h-[400vh] bg-black">
+        <ScrollCanvas /> {/* Native Sticky logic flawlessly adhered to the 400vh parent */}
         
-        <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none flex flex-col">
+        <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none flex flex-col justify-between">
           
-          <section className="h-screen flex flex-col items-center justify-center pt-20">
+          <section className="h-[100vh] flex flex-col items-center justify-center pt-20">
             <FadeInTextDesktop>
               <ItemDesktop>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-2 drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
@@ -149,7 +148,7 @@ export default function Home() {
             </FadeInTextDesktop>
           </section>
 
-          <section className="h-[150vh] flex items-center justify-center w-full relative z-20">
+          <section className="h-[80vh] flex items-center justify-center w-full relative z-20">
             <FadeInTextDesktop side="center">
               <ItemDesktop>
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 text-center drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
@@ -167,7 +166,7 @@ export default function Home() {
             </FadeInTextDesktop>
           </section>
 
-          <section className="h-[150vh] flex items-center justify-center w-full relative z-20">
+          <section className="h-[100vh] flex items-center justify-center w-full relative z-20">
             <FadeInTextDesktop side="center">
               <div className="w-full">
                 <CoreFocusAreas />
@@ -175,7 +174,7 @@ export default function Home() {
             </FadeInTextDesktop>
           </section>
 
-          <section className="h-[240vh] flex items-center justify-center pb-[10vh] w-full relative z-20">
+          <section className="h-[100vh] flex items-center justify-center w-full relative z-20 pb-10">
             <FadeInTextDesktop side="center">
               <ItemDesktop>
                 <div className="w-full">
