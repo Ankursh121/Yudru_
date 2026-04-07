@@ -123,9 +123,7 @@ export default function ScrollCanvas() {
 
   return (
     <>
-
-
-      <div className="hidden md:block sticky top-0 left-0 w-full h-screen z-0 overflow-hidden bg-black">
+      <div className="sticky top-0 left-0 w-full h-screen z-0 overflow-hidden bg-black">
         {/* width and height styled to 100% so it fits screen, internal res is higher due to dpr */}
         <canvas 
           ref={canvasRef} 
