@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Beaker, GraduationCap, Settings, Plane, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const focusAreas = [
   {
@@ -28,7 +30,35 @@ const focusAreas = [
   }
 ];
 
+const itemVariants = {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: 40,
+    scale: isMobile ? 0.95 : 1, // Scaled entry strictly for Mobile
+  }),
+  visible: (isMobile: boolean) => ({
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: isMobile 
+      ? { duration: 0.5, ease: "easeOut" as any }
+      : { duration: 1.2, ease: [0.16, 1, 0.3, 1] as any } 
+  })
+};
+
+function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
+
 export default function CoreFocusAreas() {
+  const isMobile = useMobile();
   return (
     <div className="w-full max-w-[1200px] mx-auto flex flex-col items-center px-4">
       {/* Label Pill */}
@@ -49,7 +79,12 @@ export default function CoreFocusAreas() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 w-full text-left">
         {focusAreas.map((area, idx) => (
-          <div key={idx} className="flex flex-col bg-[#0a0f16]/80 border border-[#00e5ff]/10 rounded-2xl p-6 hover:bg-[#0c131c] hover:border-[#00e5ff]/30 transition-all duration-300 backdrop-blur-xl group hover:shadow-[0_0_30px_rgba(0,229,255,0.1)]">
+          <motion.div 
+            custom={isMobile}
+            variants={itemVariants}
+            key={idx} 
+            className="flex flex-col bg-[#0a0f16]/80 border border-[#00e5ff]/10 rounded-2xl p-6 hover:bg-[#0c131c] hover:border-[#00e5ff]/30 transition-all duration-300 backdrop-blur-xl group hover:shadow-[0_0_30px_rgba(0,229,255,0.1)]"
+          >
             {/* Icon Block */}
             <div className="w-12 h-12 rounded-xl bg-[#00e5ff] flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(0,229,255,0.4)] group-hover:scale-110 transition-transform duration-300">
               <area.icon className="w-6 h-6 text-[#050b14]" strokeWidth={2} />
@@ -64,7 +99,7 @@ export default function CoreFocusAreas() {
             <Link href={area.link} className="inline-flex items-center text-[#00e5ff] text-sm font-bold tracking-wide hover:text-white transition-colors group-hover:gap-2 gap-1 mt-auto">
               Learn More <ArrowRight className="w-4 h-4 ml-1 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

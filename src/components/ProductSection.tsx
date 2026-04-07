@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export interface ProductSectionProps {
   id: string;
@@ -26,26 +27,52 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 40, filter: "blur(12px)", scale: 0.95 },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: 40, 
+    filter: isMobile ? "blur(0px)" : "blur(12px)", 
+    scale: 0.95 
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }
-  }
+    transition: isMobile 
+      ? { duration: 0.5, ease: "easeOut" as any }
+      : { duration: 1.0, ease: [0.16, 1, 0.3, 1] as any }
+  })
 };
 
 const imageVariants = {
-  hidden: { opacity: 0, scale: 0.85, filter: "blur(20px)", rotateX: 15 },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    scale: 0.85, 
+    filter: isMobile ? "blur(0px)" : "blur(20px)", 
+    rotateX: isMobile ? 0 : 15 // Strip expensive 3D rotate logic from mobile GPUs
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     scale: 1,
     filter: "blur(0px)",
     rotateX: 0,
-    transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }
-  }
+    transition: isMobile
+      ? { duration: 0.6, ease: "easeOut" as any }
+      : { duration: 1.4, ease: [0.16, 1, 0.3, 1] as any }
+  })
 };
+
+// Internal hook securely avoiding hydration failures to extract device dimensions
+function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
 
 export default function ProductSection({
   id,
@@ -59,19 +86,21 @@ export default function ProductSection({
   themeColor,
   customGrid,
 }: ProductSectionProps) {
+  const isMobile = useMobile();
   
   const contentNode = (
     <motion.div 
+      custom={isMobile}
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: isMobile ? 0.1 : 0.3 }}
       className="flex flex-col xl:w-1/2 justify-center"
     >
       
       {/* Eyebrow Label */}
-      <motion.div variants={itemVariants} 
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/[0.03] border border-white/5 w-fit mb-6"
+      <motion.div custom={isMobile} variants={itemVariants} 
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/[0.03] border border-white/5 w-fit mb-6 mx-auto xl:mx-0"
         style={{ color: themeColor }}
       >
         <eyebrow.icon className="w-4 h-4" />
@@ -79,7 +108,7 @@ export default function ProductSection({
       </motion.div>
 
       {/* Heading */}
-      <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-6 drop-shadow-md">
+      <motion.h2 custom={isMobile} variants={itemVariants} className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-6 drop-shadow-md text-center xl:text-left">
         {title.split(' - ').map((part, idx, arr) => (
           <React.Fragment key={idx}>
             {part}
@@ -91,14 +120,16 @@ export default function ProductSection({
       </motion.h2>
 
       {/* Description */}
-      <motion.p variants={itemVariants} className="text-[#8e9bb0] text-[16px] leading-relaxed mb-10 max-w-xl font-medium">
+      <motion.p custom={isMobile} variants={itemVariants} className="text-[#8e9bb0] text-[16px] leading-relaxed mb-10 max-w-xl font-medium text-center xl:text-left mx-auto xl:mx-0">
         {description}
       </motion.p>
 
       {/* Feature Bullet Cards */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+      <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
         {features.map((feat, idx) => (
-          <div 
+          <motion.div 
+            custom={isMobile}
+            variants={itemVariants}
             key={idx}
             className="flex items-start gap-4 px-5 py-4 rounded-xl bg-[#0a0f16] border border-white/5 shadow-md flex-1 hover:border-white/10 transition-colors group"
           >
@@ -108,28 +139,30 @@ export default function ProductSection({
               aria-hidden="true"
             />
             <span className="text-white/80 text-[13px] font-semibold leading-snug">{feat}</span>
-          </div>
+          </motion.div>
         ))}
       </motion.div>
 
       {/* Optional Sub-Grid Plugin (for Variants/Customizations) */}
       {customGrid && (
-        <motion.div variants={itemVariants} className="mb-10 w-full mt-4">
+        <motion.div custom={isMobile} variants={itemVariants} className="mb-10 w-full mt-4">
           {customGrid}
         </motion.div>
       )}
 
       {/* Tags Pills */}
       {tags.length > 0 && (
-        <motion.div variants={itemVariants} className="flex flex-wrap gap-3 mb-10">
+        <motion.div className="flex flex-wrap gap-3 mb-10 justify-center xl:justify-start">
           {tags.map((tag, idx) => (
-            <span 
+            <motion.span 
+              custom={isMobile}
+              variants={itemVariants}
               key={idx}
               className="px-4 py-1.5 rounded-full border bg-transparent text-[12px] font-bold tracking-wide shadow-sm"
               style={{ borderColor: `${themeColor}33`, color: themeColor }}
             >
               {tag}
-            </span>
+            </motion.span>
           ))}
         </motion.div>
       )}
@@ -138,9 +171,10 @@ export default function ProductSection({
 
   const imageNode = (
     <motion.div 
+      custom={isMobile}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
       variants={imageVariants}
       className="flex xl:w-1/2 w-full items-center justify-center relative"
       style={{ perspective: 1000 }} // required for rotateX 3D effect
@@ -181,8 +215,8 @@ export default function ProductSection({
   );
 
   return (
-    <section id={id} className="w-full min-h-screen py-32 flex items-center border-b border-white/[0.02]">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 w-full flex flex-col xl:flex-row gap-20 xl:gap-24">
+    <section id={id} className="w-full min-h-screen py-16 md:py-32 flex items-center border-b border-white/[0.02]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-16 w-full flex flex-col xl:flex-row gap-16 xl:gap-24">
         {imageSide === "left" ? (
           <>
             {imageNode}

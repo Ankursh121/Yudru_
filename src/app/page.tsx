@@ -161,21 +161,17 @@ export default function Home() {
                   Advanced aerodynamics meet precision-built components. Every element optimized for stability, efficiency, and control.
                 </p>
               </ItemDesktop>
-              <ItemDesktop>
-                <div className="w-full">
-                  <StatGrid />
-                </div>
-              </ItemDesktop>
+              <div className="w-full">
+                <StatGrid />
+              </div>
             </FadeInTextDesktop>
           </section>
 
           <section className="h-[150vh] flex items-center justify-center w-full relative z-20">
             <FadeInTextDesktop side="center">
-              <ItemDesktop>
-                <div className="w-full">
-                  <CoreFocusAreas />
-                </div>
-              </ItemDesktop>
+              <div className="w-full">
+                <CoreFocusAreas />
+              </div>
             </FadeInTextDesktop>
           </section>
 
@@ -198,7 +194,22 @@ export default function Home() {
         Pure flex stacked layers using standard fast-thumb optimizations.
         ##############################################################
       */}
-      <div className="block md:hidden relative w-full flex flex-col bg-black">
+      <div className="block md:hidden relative w-full flex flex-col bg-[#03060a] overflow-hidden">
+        
+        {/* Mobile Ambient Background Orbs */}
+        <div className="absolute top-0 left-0 w-full h-[100vh] bg-gradient-to-b from-[#00e5ff]/10 via-transparent to-transparent pointer-events-none z-0" />
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] -right-[20%] w-[350px] h-[350px] bg-[#00e5ff]/20 blur-[130px] rounded-full pointer-events-none z-0 mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[40%] -left-[20%] w-[400px] h-[400px] bg-[#00e5ff]/10 blur-[140px] rounded-full pointer-events-none z-0 mix-blend-screen" 
+        />
+        <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-[#00e5ff]/10 blur-[120px] rounded-full pointer-events-none z-0" />
+
         
         <section className="min-h-screen flex flex-col items-center justify-center pt-32 pb-16 relative z-20">
             <FadeInTextMobile>
@@ -232,21 +243,17 @@ export default function Home() {
                   Advanced aerodynamics meet precision-built components. Every element optimized for stability, efficiency, and control.
                 </p>
               </ItemMobile>
-              <ItemMobile>
-                <div className="w-full">
-                  <StatGrid />
-                </div>
-              </ItemMobile>
+              <div className="w-full">
+                <StatGrid />
+              </div>
             </FadeInTextMobile>
           </section>
 
           <section className="py-20 flex items-center justify-center w-full relative z-20">
             <FadeInTextMobile>
-              <ItemMobile>
-                <div className="w-full">
-                  <CoreFocusAreas />
-                </div>
-              </ItemMobile>
+              <div className="w-full">
+                <CoreFocusAreas />
+              </div>
             </FadeInTextMobile>
           </section>
 
