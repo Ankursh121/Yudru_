@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="text-xl font-bold tracking-tight text-white drop-shadow-sm">
         <Link href="/">Yudru Drone</Link>
       </div>
-      
+
       <div className="hidden xl:flex space-x-8 text-[13px] tracking-widest font-bold uppercase">
         {[
           { text: "Home", href: "/" },
@@ -25,19 +25,17 @@ export default function Navbar() {
         ].map((item) => {
           const isActive = pathname === item.href;
           return (
-            <Link 
-              key={item.text} 
-              href={item.href} 
-              className={`relative group inline-block transition-all duration-300 hover:-translate-y-[2px] hover:scale-110 ${
-                isActive 
-                  ? "text-[#00e5ff] drop-shadow-[0_0_15px_rgba(0,229,255,0.8)]" 
+            <Link
+              key={item.text}
+              href={item.href}
+              className={`relative group inline-block transition-all duration-300 hover:-translate-y-[2px] hover:scale-110 ${isActive
+                  ? "text-[#00e5ff] drop-shadow-[0_0_15px_rgba(0,229,255,0.8)]"
                   : "text-white/50 hover:text-[#00e5ff] hover:drop-shadow-[0_0_15px_rgba(0,229,255,0.8)]"
-              }`}
+                }`}
             >
               {item.text}
-              <span className={`absolute -bottom-1.5 left-0 w-full h-[2.5px] bg-[#00e5ff] rounded-full shadow-[0_0_12px_rgba(0,229,255,1)] transition-transform duration-300 origin-center ${
-                isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-              }`} />
+              <span className={`absolute -bottom-1.5 left-0 w-full h-[2.5px] bg-[#00e5ff] rounded-full shadow-[0_0_12px_rgba(0,229,255,1)] transition-transform duration-300 origin-center ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                }`} />
             </Link>
           );
         })}

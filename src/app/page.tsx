@@ -65,15 +65,17 @@ export default function Home() {
     <main className="relative bg-black">
       <Navbar />
       
-      {/* Scrollable container with sticky canvas */}
-      <div className="relative w-full h-[600vh]">
-        <ScrollCanvas />
+      {/* Scrollable container with sticky canvas on desktop, native stack on mobile */}
+      <div className="relative w-full md:h-[600vh]">
+        <div className="hidden md:block">
+          <ScrollCanvas />
+        </div>
         
         {/* Text Overlays Layer */}
-        <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none flex flex-col">
+        <div className="relative md:absolute top-0 left-0 w-full h-full z-10 pointer-events-none flex flex-col bg-black md:bg-transparent">
           
-          {/* HERO section (0-15%) */}
-          <section className="h-screen flex flex-col items-center justify-center pt-20">
+          {/* HERO section */}
+          <section className="h-screen md:h-screen flex flex-col items-center justify-center pt-20">
             <FadeInText>
               <Item>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-2 drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
@@ -93,8 +95,8 @@ export default function Home() {
             </FadeInText>
           </section>
 
-          {/* ENGINEERING (15-40%) */}
-          <section className="h-[150vh] flex items-center justify-center w-full relative z-20">
+          {/* ENGINEERING */}
+          <section className="py-24 min-h-[50vh] md:h-[150vh] flex items-center justify-center w-full relative z-20">
             <FadeInText side="center">
               <Item>
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 text-center drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)]">
@@ -114,8 +116,8 @@ export default function Home() {
             </FadeInText>
           </section>
 
-          {/* SCORE FOCUS AREAS (40-65%) */}
-          <section className="h-[150vh] flex items-center justify-center w-full relative z-20">
+          {/* SCORE FOCUS AREAS */}
+          <section className="py-24 min-h-[50vh] md:h-[150vh] flex items-center justify-center w-full relative z-20">
             <FadeInText side="center">
               <Item>
                 <div className="w-full">
@@ -125,8 +127,8 @@ export default function Home() {
             </FadeInText>
           </section>
 
-          {/* READY TO TAKE FLIGHT / CTA (65-100%) */}
-          <section className="h-[240vh] flex items-center justify-center pb-[10vh] w-full relative z-20">
+          {/* READY TO TAKE FLIGHT / CTA */}
+          <section className="py-24 min-h-[50vh] md:h-[240vh] flex items-center justify-center pb-[10vh] w-full relative z-20">
             <FadeInText side="center">
               <Item>
                 <div className="w-full">
