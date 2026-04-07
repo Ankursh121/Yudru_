@@ -35,9 +35,9 @@ const itemVariants = {
 };
 
 function FadeInText({ children, side = "center" }: { children: React.ReactNode, side?: "left" | "right" | "center" }) {
-  let alignClass = "text-center mx-auto items-center";
-  if (side === "left") alignClass = "text-left ml-[10%] max-w-xl items-start";
-  if (side === "right") alignClass = "text-right mr-[10%] max-w-xl ml-auto items-end";
+  let alignClass = "text-center mx-auto items-center px-4 md:px-0";
+  if (side === "left") alignClass = "text-center md:text-left mx-6 md:mx-0 md:ml-[10%] max-w-xl items-center md:items-start";
+  if (side === "right") alignClass = "text-center md:text-right mx-6 md:mx-0 md:mr-[10%] max-w-xl md:ml-auto items-center md:items-end";
 
   return (
     <motion.div

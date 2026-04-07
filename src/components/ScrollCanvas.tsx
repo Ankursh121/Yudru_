@@ -58,8 +58,10 @@ export default function ScrollCanvas() {
     const img = imgArray[index - 1];
     if (!img || !img.complete) return;
 
-    // Canvas sizing based on window and devicePixelRatio for retina quality
-    const dpr = window.devicePixelRatio || 1;
+    // Canvas sizing based on window and capped devicePixelRatio for retina performance without lag
+    const rawDpr = window.devicePixelRatio || 1;
+    // Strictly cap to 1.5 to protect mobile GPUs from drawing massive 4K internal buffers
+    const dpr = Math.min(rawDpr, 1.5);
     const cw = window.innerWidth;
     const ch = window.innerHeight;
     
@@ -70,6 +72,9 @@ export default function ScrollCanvas() {
     ctx.scale(dpr, dpr);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
+    
+    // Shift visual stylings to native canvas engine (hardware accelerated) instead of DOM CSS
+    ctx.filter = "contrast(1.4) saturate(1.15) brightness(0.9)";
 
     // Calculate aspect ratios & dimensions to draw properly (Object-fit bounds)
     const imgRatio = img.width / img.height;
@@ -92,10 +97,15 @@ export default function ScrollCanvas() {
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
   };
 
+  const rafRef = useRef<number | null>(null);
+
   useMotionValueEvent(frameIndex, "change", (latest) => {
     const currentFrame = Math.floor(latest);
     if (images.length > 0) {
-      drawFrame(currentFrame, images);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        drawFrame(currentFrame, images);
+      });
     }
   });
 
@@ -120,7 +130,6 @@ export default function ScrollCanvas() {
         <canvas 
           ref={canvasRef} 
           className="w-full h-full block" 
-          style={{ filter: "contrast(1.4) saturate(1.15) brightness(0.9)" }} 
         />
         {/* Vignette overlay to ensure absolute seamless edge blending into black and improve text readability */}
         <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.6)_60%,#000000_100%)]" />
