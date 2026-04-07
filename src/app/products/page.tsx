@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 export default function ProductsPage() {
   return (
-    <main className="min-h-screen bg-[#03060a] relative flex flex-col font-sans">
+    <main className="min-h-screen bg-[#03060a] relative flex flex-col font-sans overflow-x-hidden w-full">
       <Navbar />
 
       {/* Hero Header */}

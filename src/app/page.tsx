@@ -115,7 +115,7 @@ function ItemMobile({ children, className = "" }: { children: React.ReactNode; c
 // =========================================================================
 export default function Home() {
   return (
-    <main className="relative bg-black w-full overflow-hidden">
+    <main className="relative bg-black w-full text-white">
       <Navbar />
       
       {/* 
