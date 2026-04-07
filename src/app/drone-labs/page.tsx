@@ -22,7 +22,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, ease: "easeOut" as const }
+    transition: { duration: 0.5, ease: "easeOut" as const }
   }
 };
 
@@ -80,7 +80,7 @@ export default function DroneLabsPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center justify-center text-center mb-16"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tighter drop-shadow-sm">
@@ -131,7 +131,7 @@ export default function DroneLabsPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex-1 flex flex-col items-start"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-[3.5rem] font-bold tracking-tighter text-white mb-8 leading-[1.1]">
@@ -163,8 +163,8 @@ export default function DroneLabsPage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
             whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as const }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
             style={{ y: imageY }}
             className="flex-1 w-full relative h-[500px]"
           >

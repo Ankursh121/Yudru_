@@ -15,7 +15,7 @@ const containerDesktop = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 }
   }
 };
 
@@ -30,7 +30,7 @@ const itemDesktop = {
     opacity: 1, 
     y: 0, 
     filter: "blur(0px)",
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as const } 
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } 
   }
 };
 
@@ -44,7 +44,7 @@ function FadeInTextDesktop({ children, side = "center" }: { children: React.Reac
       variants={containerDesktop}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.3, margin: "0px 0px -10% 0px" }}
+      viewport={{ once: false, amount: 0.15, margin: "0px 0px -5% 0px" }}
       className={`pointer-events-auto flex flex-col ${alignClass}`}
     >
       {children}

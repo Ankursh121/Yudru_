@@ -40,7 +40,7 @@ const itemVariants = {
     scale: 1,
     transition: isMobile 
       ? { duration: 0.5, ease: "easeOut" as any }
-      : { duration: 1.0, ease: [0.16, 1, 0.3, 1] as any }
+      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any }
   })
 };
 
@@ -58,7 +58,7 @@ const imageVariants = {
     rotateX: 0,
     transition: isMobile
       ? { duration: 0.6, ease: "easeOut" as any }
-      : { duration: 1.4, ease: [0.16, 1, 0.3, 1] as any }
+      : { duration: 0.85, ease: [0.16, 1, 0.3, 1] as any }
   })
 };
 
@@ -94,7 +94,7 @@ export default function ProductSection({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: isMobile ? 0.1 : 0.3 }}
+      viewport={{ once: true, amount: isMobile ? 0.1 : 0.15 }}
       className="flex flex-col xl:w-1/2 justify-center"
     >
       
@@ -174,7 +174,7 @@ export default function ProductSection({
       custom={isMobile}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
+      viewport={{ once: true, amount: isMobile ? 0.1 : 0.15 }}
       variants={imageVariants}
       className="flex xl:w-1/2 w-full items-center justify-center relative"
       style={{ perspective: 1000 }} // required for rotateX 3D effect

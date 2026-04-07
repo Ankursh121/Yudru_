@@ -16,7 +16,7 @@ const itemVariants = {
     scale: 1,
     transition: isMobile 
       ? { duration: 0.5, ease: "easeOut" as any }
-      : { duration: 1.2, ease: [0.16, 1, 0.3, 1] as any } 
+      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any } 
   })
 };
 
@@ -40,7 +40,7 @@ function Counter({ value, suffix = "", label, icon: Icon, isMobile }: any) {
   useEffect(() => {
     if (isInView) {
       animate(motionValue, value, {
-        duration: 2.5,
+        duration: 1.2,
         ease: [0.16, 1, 0.3, 1], // Cinematic easing
         onUpdate: (latest) => {
           if (ref.current) {

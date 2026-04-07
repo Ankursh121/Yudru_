@@ -25,7 +25,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, ease: "easeOut" as const }
+    transition: { duration: 0.5, ease: "easeOut" as const }
   }
 };
 
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as const }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
             className="flex-1 w-full relative"
           >
             <div className="relative w-full aspect-square max-w-[600px] ml-auto rounded-[32px] overflow-hidden border border-white/5 shadow-2xl">
@@ -132,7 +132,7 @@ export default function AboutPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {/* Vision */}
@@ -168,7 +168,7 @@ export default function AboutPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center justify-center text-center mb-16"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tighter">
@@ -183,7 +183,7 @@ export default function AboutPage() {
              variants={containerVariants}
              initial="hidden"
              whileInView="visible"
-             viewport={{ once: true, amount: 0.2 }}
+             viewport={{ once: true, amount: 0.1 }}
              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
@@ -321,8 +321,8 @@ export default function AboutPage() {
         <motion.div 
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, ease: "easeOut" as const }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
           className="max-w-4xl w-full bg-[#0a0f16] border border-white/10 rounded-[32px] p-12 md:p-16 text-center flex flex-col items-center justify-center shadow-2xl relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-[#00e5ff]/5 to-transparent pointer-events-none" />

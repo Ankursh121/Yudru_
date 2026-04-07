@@ -25,7 +25,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, ease: "easeOut" as const }
+    transition: { duration: 0.5, ease: "easeOut" as const }
   }
 };
 
@@ -90,7 +90,7 @@ export default function RepairPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center justify-center text-center mb-16"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tighter drop-shadow-sm">
@@ -105,7 +105,7 @@ export default function RepairPage() {
              variants={containerVariants}
              initial="hidden"
              whileInView="visible"
-             viewport={{ once: true, amount: 0.2 }}
+             viewport={{ once: true, amount: 0.1 }}
              className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {[
@@ -140,7 +140,7 @@ export default function RepairPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center justify-center text-center mb-20 relative z-10"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter drop-shadow-sm">
@@ -193,7 +193,7 @@ export default function RepairPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center text-center mb-28"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
@@ -219,8 +219,8 @@ export default function RepairPage() {
                 key={i}
                 initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, ease: "easeOut" as const }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, ease: "easeOut" as const }}
                 className={`relative w-full flex flex-col lg:flex-row items-center ${node.dir === 'left' ? 'lg:justify-start' : 'justify-end lg:justify-end'} z-10 pl-20 lg:pl-0`}
               >
                 {/* Timeline Dot */}
@@ -255,8 +255,8 @@ export default function RepairPage() {
         <motion.div 
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, ease: "easeOut" as const }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
           className="max-w-5xl w-full bg-[#0a0f16] border border-white/10 rounded-[32px] p-10 md:p-16 flex flex-col md:flex-row items-center md:items-start justify-between gap-12 shadow-2xl relative overflow-hidden"
         >
           {/* Cybernetic glow pulse */}

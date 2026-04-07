@@ -23,7 +23,7 @@ const itemVariants = {
     y: 0,
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 1.0, ease: "easeOut" as const }
+    transition: { duration: 0.5, ease: "easeOut" as const }
   }
 };
 
@@ -85,7 +85,7 @@ export default function TrainingPage() {
             initial={{ opacity: 0, scale: 0.85, filter: "blur(20px)", rotateX: 10 }}
             whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)", rotateX: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
             style={{ perspective: 1000, y: heroImageY }}
             className="flex-1 w-full relative"
           >
@@ -105,7 +105,7 @@ export default function TrainingPage() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.8 }}
+          viewport={{ once: true, amount: 0.1 }}
           className="w-full max-w-[1200px] mx-auto mt-24 mb-10 px-8 grid grid-cols-2 md:grid-cols-4 gap-8 z-20"
         >
           {[
@@ -135,7 +135,7 @@ export default function TrainingPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center justify-center text-center mb-20 relative z-10"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter drop-shadow-sm">
@@ -253,8 +253,8 @@ export default function TrainingPage() {
         <motion.div 
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, ease: "easeOut" as const }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
           className="max-w-4xl w-full bg-[#0a0f16] border border-white/5 rounded-[32px] p-12 md:p-16 text-center flex flex-col items-center shadow-[0_30px_60px_rgba(0,0,0,0.5)] relative overflow-hidden group"
         >
           {/* Cybernetic glow pulse */}
