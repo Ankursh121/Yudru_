@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 import CursorGlow from "@/components/CursorGlow";
-
+import ChatWidget from "@/components/ChatWidget";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <CursorGlow />
+        <ChatWidget />
         {children}
       </body>
     </html>
