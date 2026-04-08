@@ -9,7 +9,7 @@ export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
 
-  const { messages, status, sendMessage } = useChat();
+  const { messages, status, sendMessage, error } = useChat();
   const isLoading = status === "submitted" || status === "streaming";
 
   const handleCustomSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,8 +52,8 @@ export default function ChatWidget() {
           >
             {/* Header */}
             <div className="bg-white/5 p-4 flex justify-between items-center border-b border-white/10 relative overflow-hidden">
-              <div 
-                className="absolute inset-0" 
+              <div
+                className="absolute inset-0"
                 style={{ background: 'linear-gradient(to right, rgba(0, 229, 255, 0.05), rgba(168, 85, 247, 0.05))' }}
               />
               <div className="flex items-center space-x-3 relative z-10">
@@ -105,7 +105,7 @@ export default function ChatWidget() {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex flex-row items-start space-x-3"
                   >
-                    <div 
+                    <div
                       className="w-10 h-10 rounded-full border border-white/10 overflow-hidden shrink-0 mt-1"
                       style={{ boxShadow: '0 0 20px rgba(0, 229, 255, 0.3)' }}
                     >
@@ -155,7 +155,7 @@ export default function ChatWidget() {
                       }`}
                   >
                     {m.role !== "user" && (
-                      <div 
+                      <div
                         className="w-8 h-8 rounded-full border border-white/10 overflow-hidden shrink-0 mt-1"
                         style={{ boxShadow: '0 0 15px rgba(0, 229, 255, 0.2)' }}
                       >
@@ -193,6 +193,11 @@ export default function ChatWidget() {
                 </div>
               )}
 
+              {error && (
+                <div className="p-3 mb-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
+                  Error: {error.message || "Failed to get response. Please check your connection."}
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
 
