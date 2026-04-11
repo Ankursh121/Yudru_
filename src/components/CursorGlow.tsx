@@ -35,7 +35,7 @@ export default function CursorGlow() {
 
   return (
     <motion.div
-      className="fixed pointer-events-none z-[9999] overflow-visible"
+      className="fixed pointer-events-none z-[9999] overflow-visible hidden md:block"
       style={{
         left: 0,
         top: 0,

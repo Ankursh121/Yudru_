@@ -11,12 +11,8 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2 flex flex-col pr-8">
             <div className="flex items-center gap-4 mb-8">
-              {/* Pseudo Logo */}
-              <div className="flex flex-col items-center">
-                <Combine className="w-10 h-10 text-white" strokeWidth={1} />
-                <span className="text-[10px] font-bold tracking-widest uppercase mt-1 text-white/50">Yudru</span>
-              </div>
-              <span className="text-3xl font-bold tracking-tighter text-[#00e5ff]">YuDru</span>
+              {/* Brand Logo */}
+              <img src="/Yudru_Logo.png" alt="Yudru Drone Solutions Logo" className="h-[65px] md:h-[90px] w-auto object-contain drop-shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-transform hover:scale-105 duration-300" />
             </div>
             <p className="text-[#8e9bb0] text-[15px] leading-relaxed mb-10 max-w-sm">
               Indigenous drone technology solutions for monitoring, logistics, and industrial applications. 
