@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import ProductSection from "@/components/ProductSection";
 import { Plane, Eye, Package, Camera, MousePointer2, Battery, Shield } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { WHATSAPP_URL } from "@/constants/contact";
 
 export default function ProductsPage() {
   return (
@@ -246,12 +248,20 @@ export default function ProductsPage() {
             Partner with YuDru for indigenous drone solutions tailored to your needs.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-5">
-            <button className="px-8 py-3 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:bg-white">
+            <a 
+              href={WHATSAPP_URL} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:bg-white"
+            >
               Get in Touch →
-            </button>
-            <button className="px-8 py-3 rounded-xl bg-transparent border border-[#00e5ff]/40 text-[#00e5ff] font-bold text-[15px] transition-all hover:bg-[#00e5ff]/5">
+            </a>
+            <Link 
+              href="/r-and-d" 
+              className="px-8 py-3 rounded-xl bg-transparent border border-[#00e5ff]/40 text-[#00e5ff] font-bold text-[15px] transition-all hover:bg-[#00e5ff]/5"
+            >
               Explore R&D
-            </button>
+            </Link>
           </div>
         </div>
       </section>

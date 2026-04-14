@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Beaker, GraduationCap, Settings, Plane, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useMobile } from "@/hooks/useMobile";
 
 const focusAreas = [
   {
@@ -41,21 +42,12 @@ const itemVariants = {
     y: 0, 
     scale: 1,
     transition: isMobile 
-      ? { duration: 0.5, ease: "easeOut" as any }
+      ? { duration: 0.4, ease: "easeOut" as any }
       : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any } 
   })
 };
 
-function useMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handler = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-  return isMobile;
-}
+// useMobile hook moved to shared hooks/useMobile.ts
 
 export default function CoreFocusAreas() {
   const isMobile = useMobile();
@@ -83,6 +75,9 @@ export default function CoreFocusAreas() {
             custom={isMobile}
             variants={itemVariants}
             key={idx} 
+            whileInView="visible"
+            initial="hidden"
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.15 }}
             className="flex flex-col bg-[#0a0f16]/80 border border-[#00e5ff]/10 rounded-2xl p-6 hover:bg-[#0c131c] hover:border-[#00e5ff]/30 transition-all duration-300 backdrop-blur-xl group hover:shadow-[0_0_30px_rgba(0,229,255,0.1)]"
           >
             {/* Icon Block */}

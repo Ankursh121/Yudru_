@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Combine } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { WHATSAPP_URL } from "@/constants/contact";
 
 export default function Footer() {
   return (
@@ -57,6 +58,10 @@ export default function Footer() {
           <div className="flex flex-col">
             <h4 className="text-white font-bold text-lg mb-8 tracking-wide drop-shadow-sm">Contact</h4>
             <div className="flex flex-col gap-6">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[#00e5ff] hover:text-white transition-colors text-[15px] font-medium group">
+                <MessageCircle className="w-[18px] h-[18px] group-hover:-translate-y-0.5 transition-transform" />
+                <span>WhatsApp Us</span>
+              </a>
               <a href="mailto:info@yudru.com" className="flex items-center gap-3 text-[#00e5ff] hover:text-white transition-colors text-[15px] font-medium group">
                 <Mail className="w-[18px] h-[18px] group-hover:-translate-y-0.5 transition-transform" />
                 <span>info@yudru.com</span>

@@ -15,7 +15,7 @@ const itemVariants = {
     y: 0, 
     scale: 1,
     transition: isMobile 
-      ? { duration: 0.5, ease: "easeOut" as any }
+      ? { duration: 0.4, ease: "easeOut" as any, staggerChildren: 0.05 }
       : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any } 
   })
 };
@@ -55,6 +55,7 @@ function Counter({ value, suffix = "", label, icon: Icon, isMobile }: any) {
     <motion.div 
       custom={isMobile} 
       variants={itemVariants}
+      viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }}
       className="flex flex-col items-center justify-center p-8 bg-[#0a0f16]/60 border border-[#00e5ff]/10 rounded-2xl backdrop-blur-xl shadow-2xl transition-all hover:bg-[#0a0f16]/80 hover:border-[#00e5ff]/30"
     >
       <Icon className="w-8 h-8 text-[#00e5ff] mb-6 opacity-90" strokeWidth={1.5} />

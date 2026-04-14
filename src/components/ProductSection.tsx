@@ -3,6 +3,7 @@ import Image from "next/image";
 import { type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useMobile } from "@/hooks/useMobile";
 
 export interface ProductSectionProps {
   id: string;
@@ -20,10 +21,13 @@ export interface ProductSectionProps {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { 
+      staggerChildren: isMobile ? 0.05 : 0.15, 
+      delayChildren: isMobile ? 0 : 0.1 
+    }
+  })
 };
 
 const itemVariants = {
@@ -62,17 +66,7 @@ const imageVariants = {
   })
 };
 
-// Internal hook securely avoiding hydration failures to extract device dimensions
-function useMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handler = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-  return isMobile;
-}
+// useMobile moved to shared hooks/useMobile.ts
 
 export default function ProductSection({
   id,
@@ -94,7 +88,7 @@ export default function ProductSection({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: isMobile ? 0.1 : 0.15 }}
+      viewport={{ once: true, amount: isMobile ? 0.05 : 0.15 }}
       className="flex flex-col xl:w-1/2 justify-center"
     >
       

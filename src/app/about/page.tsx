@@ -9,31 +9,44 @@ import {
   Eye, Target, Crosshair, Shield, Rocket, Users, 
   HelpCircle, ChevronDown
 } from "lucide-react";
+import { WHATSAPP_URL } from "@/constants/contact";
+import { useMobile } from "@/hooks/useMobile";
 
 // Framer motion variants
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { 
+      staggerChildren: isMobile ? 0.05 : 0.15, 
+      delayChildren: isMobile ? 0 : 0.1 
+    }
+  })
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: isMobile ? 20 : 30, 
+    filter: isMobile ? "blur(0px)" : "blur(10px)",
+    scale: isMobile ? 1 : 0.95
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: "easeOut" as const }
-  }
+    scale: 1,
+    transition: isMobile 
+      ? { duration: 0.4, ease: "easeOut" as const }
+      : { duration: 0.5, ease: "easeOut" as const }
+  })
 };
 
-const AccordionItem = ({ question, answer }: { question: string; answer: string }) => {
+const AccordionItem = ({ question, answer, isMobile }: { question: string; answer: string; isMobile: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <motion.div variants={itemVariants} className="mb-3">
+    <motion.div custom={isMobile} variants={itemVariants} className="mb-3">
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between p-5 text-left rounded-xl border transition-all duration-300 ${isOpen ? 'bg-[#00e5ff]/5 border-[#00e5ff]/30' : 'bg-[#0a0f16] border-white/5 hover:border-white/10'}`}
@@ -66,6 +79,7 @@ const AccordionItem = ({ question, answer }: { question: string; answer: string 
 };
 
 export default function AboutPage() {
+  const isMobile = useMobile();
   return (
     <main className="min-h-screen bg-[#03060a] relative flex flex-col font-sans overflow-hidden">
       <Navbar />
@@ -82,6 +96,7 @@ export default function AboutPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            custom={isMobile}
             className="flex-1 flex flex-col items-start"
           >
             <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold tracking-tighter text-white mb-8 leading-[1.05]">
@@ -96,13 +111,15 @@ export default function AboutPage() {
               With a commitment to 100% non-Chinese components and transparent manufacturing, we provide compliant solutions suitable for government, enterprise, and research deployment.
             </motion.p>
 
-            <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                href="/contact"
+            <motion.div custom={isMobile} variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <a 
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:bg-white transition-all inline-flex items-center gap-2"
               >
                 Get in Touch <span className="text-[18px] leading-none mb-[2px]">→</span>
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -132,11 +149,11 @@ export default function AboutPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {/* Vision */}
-            <motion.div variants={itemVariants} className="bg-[#0a0f16] border border-white/5 p-10 rounded-3xl hover:border-[#00e5ff]/30 transition-colors shadow-lg group">
+            <motion.div custom={isMobile} variants={itemVariants} className="bg-[#0a0f16] border border-white/5 p-10 rounded-3xl hover:border-[#00e5ff]/30 transition-colors shadow-lg group">
               <div className="w-14 h-14 rounded-full bg-[#00e5ff]/10 flex items-center justify-center mb-6 border border-[#00e5ff]/20 text-[#00e5ff] group-hover:scale-110 transition-transform">
                 <Eye className="w-6 h-6" strokeWidth={2} />
               </div>
@@ -147,7 +164,7 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Mission */}
-            <motion.div variants={itemVariants} className="bg-[#0a0f16] border border-white/5 p-10 rounded-3xl hover:border-[#00e5ff]/30 transition-colors shadow-lg group">
+            <motion.div custom={isMobile} variants={itemVariants} className="bg-[#0a0f16] border border-white/5 p-10 rounded-3xl hover:border-[#00e5ff]/30 transition-colors shadow-lg group">
               <div className="w-14 h-14 rounded-full bg-[#00e5ff]/10 flex items-center justify-center mb-6 border border-[#00e5ff]/20 text-[#00e5ff] group-hover:scale-110 transition-transform">
                 <Target className="w-6 h-6" strokeWidth={2} />
               </div>
@@ -223,7 +240,7 @@ export default function AboutPage() {
             viewport={{ once: true, amount: 0.1 }}
             className="flex flex-col items-center justify-center text-center mb-20"
           >
-            <motion.div variants={itemVariants} className="w-16 h-16 rounded-full bg-[#00e5ff]/10 flex items-center justify-center mb-6 border border-[#00e5ff]/20 text-[#00e5ff]">
+            <motion.div custom={isMobile} variants={itemVariants} className="w-16 h-16 rounded-full bg-[#00e5ff]/10 flex items-center justify-center mb-6 border border-[#00e5ff]/20 text-[#00e5ff]">
               <HelpCircle className="w-8 h-8" strokeWidth={2} />
             </motion.div>
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
@@ -246,6 +263,7 @@ export default function AboutPage() {
               <motion.h3 variants={itemVariants} className="text-[#00e5ff] font-bold text-[22px] mb-6 tracking-tight">Products & Solutions</motion.h3>
               <div className="flex flex-col">
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="What types of drones does YuDru offer?"
                   answer="YuDru offers a comprehensive range including Sports Drones, Monitoring Drones, Logistics Drones (5kg-100kg), Mapping Drones, and Battery/Power Systems. All our products are 100% non-Chinese and indigenously developed."
                 />
@@ -334,9 +352,9 @@ export default function AboutPage() {
             Our team is here to help. Reach out and we&apos;ll get back to you promptly.
           </p>
 
-          <Link href="/contact" className="px-10 py-4 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[16px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:bg-white relative z-10 flex items-center gap-2">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="px-10 py-4 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[16px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:bg-white relative z-10 flex items-center gap-2">
             Contact Us <span>→</span>
-          </Link>
+          </a>
         </motion.div>
       </section>
 

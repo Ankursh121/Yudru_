@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { WHATSAPP_URL } from "@/constants/contact";
+import { useMobile } from "@/hooks/useMobile";
 import { 
   Wrench, PhoneCall, ShieldCheck, Clock, CheckCircle2, 
   Cpu, Battery, Camera, Radio, Settings, Hammer,
@@ -13,23 +15,35 @@ import {
 // Framer motion variants
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { 
+      staggerChildren: isMobile ? 0.05 : 0.15, 
+      delayChildren: isMobile ? 0 : 0.1 
+    }
+  })
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: isMobile ? 20 : 40, 
+    filter: isMobile ? "blur(0px)" : "blur(12px)", 
+    scale: isMobile ? 1 : 0.95 
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: "easeOut" as const }
-  }
+    scale: 1,
+    transition: isMobile 
+      ? { duration: 0.4, ease: "easeOut" as const }
+      : { duration: 0.5, ease: "easeOut" as const }
+  })
 };
 
 export default function RepairPage() {
+  const isMobile = useMobile();
   return (
     <main className="min-h-screen bg-[#03060a] relative flex flex-col font-sans overflow-hidden">
       <Navbar />
@@ -45,9 +59,10 @@ export default function RepairPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            custom={isMobile}
             className="flex flex-col items-center"
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 mb-8 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+            <motion.div custom={isMobile} variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 mb-8 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
               <Wrench className="w-4 h-4 text-[#00e5ff]" />
               <span className="text-[#00e5ff] text-[12px] font-bold tracking-[0.1em] uppercase">Expert Repair Services</span>
             </motion.div>
@@ -60,14 +75,16 @@ export default function RepairPage() {
               Get your drone back in the air with our certified repair services. Fast turnaround, quality parts, and expert technicians.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-4">
+            <motion.div custom={isMobile} variants={itemVariants} className="flex flex-wrap items-center justify-center gap-4">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link 
-                  href="/contact"
+                <a 
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] shadow-[0_0_25px_rgba(0,229,255,0.25)] hover:shadow-[0_0_35px_rgba(255,255,255,0.5)] hover:bg-white transition-all inline-flex items-center gap-2"
                 >
                   Request Repair <span className="text-[18px] leading-none mb-[2px]">→</span>
-                </Link>
+                </a>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <a 
@@ -293,7 +310,14 @@ export default function RepairPage() {
 
           {/* Right Side: Button Links */}
           <div className="flex flex-col items-center md:items-end justify-center w-full md:w-auto relative z-10 space-y-4 mt-4 md:mt-0">
-            {/* The user explicitly requested to remove the Get Free Quote button.  */}
+            <a 
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full md:w-[220px] px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] hover:bg-white transition-all text-center shadow-[0_0_20px_rgba(0,229,255,0.2)]"
+            >
+              Chat on WhatsApp
+            </a>
             <button className="w-full md:w-[220px] px-8 py-3.5 rounded-xl border border-white/20 text-white font-bold text-[15px] hover:bg-white/5 transition-all text-center">
               View FAQs
             </button>

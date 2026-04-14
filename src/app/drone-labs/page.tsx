@@ -6,27 +6,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FlaskConical, Monitor, Users, Cpu, Microscope, Zap } from "lucide-react";
+import { WHATSAPP_URL } from "@/constants/contact";
+import { useMobile } from "@/hooks/useMobile";
 
 // Framer motion variants
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { 
+      staggerChildren: isMobile ? 0.05 : 0.15, 
+      delayChildren: isMobile ? 0 : 0.1 
+    }
+  })
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: isMobile ? 20 : 30, 
+    filter: isMobile ? "blur(0px)" : "blur(10px)",
+    scale: isMobile ? 1 : 0.95
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: "easeOut" as const }
-  }
+    scale: 1,
+    transition: isMobile 
+      ? { duration: 0.4, ease: "easeOut" as const }
+      : { duration: 0.5, ease: "easeOut" as const }
+  })
 };
 
 export default function DroneLabsPage() {
+  const isMobile = useMobile();
   const { scrollYProgress } = useScroll();
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
@@ -45,9 +59,10 @@ export default function DroneLabsPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            custom={isMobile}
             className="flex flex-col items-center"
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 mb-8 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+            <motion.div custom={isMobile} variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 mb-8 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
               <FlaskConical className="w-4 h-4 text-[#00e5ff]" />
               <span className="text-[#00e5ff] text-[12px] font-bold tracking-[0.1em] uppercase">Innovation Hub</span>
             </motion.div>
@@ -60,13 +75,15 @@ export default function DroneLabsPage() {
               Our state-of-the-art laboratories serve as the innovation and training backbone of YuDru, featuring cutting-edge facilities for every aspect of drone development.
             </motion.p>
 
-            <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                href="/contact"
+            <motion.div custom={isMobile} variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <a 
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] shadow-[0_0_25px_rgba(0,229,255,0.25)] hover:shadow-[0_0_35px_rgba(255,255,255,0.5)] hover:bg-white transition-all inline-flex items-center gap-2"
               >
                 Schedule a Visit <span className="text-[18px] leading-none mb-[2px]">→</span>
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
         </div>
@@ -80,7 +97,7 @@ export default function DroneLabsPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
             className="flex flex-col items-center justify-center text-center mb-16"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tighter drop-shadow-sm">
@@ -95,7 +112,7 @@ export default function DroneLabsPage() {
              variants={containerVariants}
              initial="hidden"
              whileInView="visible"
-             viewport={{ once: true, amount: 0.1 }}
+             viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
@@ -131,10 +148,10 @@ export default function DroneLabsPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
             className="flex-1 flex flex-col items-start"
           >
-            <motion.h2 variants={itemVariants} className="text-4xl md:text-[3.5rem] font-bold tracking-tighter text-white mb-8 leading-[1.1]">
+            <motion.h2 custom={isMobile} variants={itemVariants} className="text-4xl md:text-[3.5rem] font-bold tracking-tighter text-white mb-8 leading-[1.1]">
               Built for <span className="text-[#00e5ff] drop-shadow-[0_0_20px_rgba(0,229,255,0.3)]">Innovation</span>
             </motion.h2>
 

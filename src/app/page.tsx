@@ -67,22 +67,22 @@ const containerMobile = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.05 }
+    transition: { staggerChildren: 0.05, delayChildren: 0 }
   }
 };
 
 const itemMobile = {
   hidden: { 
     opacity: 0, 
-    y: 40,
-    scale: 0.95,
-    transition: { duration: 0.3, ease: "easeOut" as const }
+    y: 20,
+    scale: 0.98,
+    transition: { duration: 0.25, ease: "easeOut" as const }
   },
   visible: {
     opacity: 1, 
     y: 0, 
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" as const } 
+    transition: { duration: 0.4, ease: "easeOut" as const } 
   }
 };
 
@@ -94,7 +94,7 @@ function FadeInTextMobile({ children }: { children: React.ReactNode }) {
       variants={containerMobile}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0.05 }}
       className={`pointer-events-auto flex flex-col ${alignClass}`}
     >
       {children}

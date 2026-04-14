@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WHATSAPP_URL } from "@/constants/contact";
 
 const NAV_LINKS = [
   { text: "Home", href: "/" },
@@ -53,9 +54,14 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link href="/contact" className="hidden sm:flex px-6 py-2.5 rounded-full bg-gradient-to-r from-[#00e5ff] via-cyan-300 to-[#00e5ff] bg-[length:200%_auto] hover:bg-[position:right_center] text-[#050b14] text-[14px] font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:shadow-[0_0_25px_rgba(255,255,255,0.8)] tracking-wide z-50">
+          <a 
+            href={WHATSAPP_URL} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hidden sm:flex px-6 py-2.5 rounded-full bg-gradient-to-r from-[#00e5ff] via-cyan-300 to-[#00e5ff] bg-[length:200%_auto] hover:bg-[position:right_center] text-[#050b14] text-[14px] font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:shadow-[0_0_25px_rgba(255,255,255,0.8)] tracking-wide z-50"
+          >
             Get in Touch
-          </Link>
+          </a>
 
           {/* Mobile Menu Toggle button */}
           <button
@@ -125,13 +131,15 @@ export default function Navbar() {
               </div>
 
               <div className="w-full px-6 mt-auto shrink-0">
-                <Link
-                  href="/contact"
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
                   className="block w-full text-center px-6 py-4 rounded-xl bg-gradient-to-r from-[#00e5ff] via-cyan-300 to-[#00e5ff] bg-[length:200%_auto] hover:bg-[position:right_center] text-[#050b14] text-[15px] font-bold transition-all duration-300 hover:scale-105 shadow-[0_4px_20px_rgba(0,229,255,0.4)] tracking-wide"
                 >
                   Get in Touch
-                </Link>
+                </a>
               </div>
             </motion.div>
           </>

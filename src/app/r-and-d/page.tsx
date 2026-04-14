@@ -6,27 +6,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FlaskConical, Cpu, Radio, Compass, Building2, Users } from "lucide-react";
+import { WHATSAPP_URL } from "@/constants/contact";
+import { useMobile } from "@/hooks/useMobile";
 
 // Framer motion variants
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { 
+      staggerChildren: isMobile ? 0.05 : 0.15, 
+      delayChildren: isMobile ? 0 : 0.1 
+    }
+  })
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: isMobile ? 20 : 30, 
+    filter: isMobile ? "blur(0px)" : "blur(10px)",
+    scale: isMobile ? 1 : 0.95
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: "easeOut" as const }
-  }
+    scale: 1,
+    transition: isMobile 
+      ? { duration: 0.4, ease: "easeOut" as const }
+      : { duration: 0.5, ease: "easeOut" as const }
+  })
 };
 
 export default function RDPage() {
+  const isMobile = useMobile();
   return (
     <main className="min-h-screen bg-[#03060a] relative flex flex-col font-sans">
       <Navbar />
@@ -43,9 +57,10 @@ export default function RDPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            custom={isMobile}
             className="flex-1 flex flex-col items-start"
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 mb-8 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+            <motion.div custom={isMobile} variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 mb-8 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
               <FlaskConical className="w-4 h-4 text-[#00e5ff]" />
               <span className="text-[#00e5ff] text-[12px] font-bold tracking-[0.1em] uppercase">Research & Development</span>
             </motion.div>
@@ -59,13 +74,15 @@ export default function RDPage() {
               Our R&D division leads innovation in drone technology through advanced research, prototyping, and collaborative development with industry and academic partners.
             </motion.p>
 
-            <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                href="/contact"
+            <motion.div custom={isMobile} variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <a 
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] shadow-[0_0_25px_rgba(0,229,255,0.25)] hover:shadow-[0_0_35px_rgba(255,255,255,0.5)] hover:bg-white transition-all inline-flex items-center gap-2"
               >
                 Partner With Us <span className="text-[18px] leading-none mb-[2px]">→</span>
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -96,7 +113,7 @@ export default function RDPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
             className="flex flex-col items-center justify-center text-center mb-20"
           >
             <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter drop-shadow-sm">
@@ -111,7 +128,7 @@ export default function RDPage() {
              variants={containerVariants}
              initial="hidden"
              whileInView="visible"
-             viewport={{ once: true, amount: 0.1 }}
+             viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
@@ -167,7 +184,7 @@ export default function RDPage() {
                 key={i}
                 initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true, amount: 0.1 }}
+                viewport={{ once: true, amount: isMobile ? 0.05 : 0.1 }} custom={isMobile}
                 transition={{ duration: 0.5, ease: "easeOut" as const }}
                 className={`relative w-full flex items-center ${node.dir === 'left' ? 'justify-end lg:justify-start' : 'justify-end'} z-10 pl-20 lg:pl-0`}
               >
@@ -223,9 +240,9 @@ export default function RDPage() {
             </span>
           </div>
 
-          <Link href="/contact" className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:bg-white relative z-10 inline-block">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:bg-white relative z-10 inline-block">
             Become a Partner →
-          </Link>
+          </a>
         </div>
       </section>
 

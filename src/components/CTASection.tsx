@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Building2, Landmark, Lightbulb, MessageSquare, ArrowRight } from 'lucide-react';
+import { WHATSAPP_URL } from '@/constants/contact';
 
 export default function CTASection() {
   return (
@@ -18,26 +19,26 @@ export default function CTASection() {
 
       {/* Pill Links container */}
       <div className="flex flex-col md:flex-row gap-5 justify-center mb-16 relative z-10 w-full max-w-4xl">
-        <div className="flex items-center justify-center gap-3 bg-[#0d131cdc] hover:bg-[#121a25] transition-colors rounded-xl px-6 py-5 flex-1 border border-white/5 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-          <Building2 className="w-[18px] h-[18px] text-[#00e5ff]" strokeWidth={2.5}/>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-[#0d131cdc] hover:bg-[#121a25] transition-colors rounded-xl px-6 py-5 flex-1 border border-white/5 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group">
+          <Building2 className="w-[18px] h-[18px] text-[#00e5ff] group-hover:scale-110 transition-transform" strokeWidth={2.5}/>
           <span className="text-[14px] font-bold text-white tracking-wide">Enterprise Inquiries</span>
-        </div>
-        <div className="flex items-center justify-center gap-3 bg-[#0d131cdc] hover:bg-[#121a25] transition-colors rounded-xl px-6 py-5 flex-1 border border-white/5 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-          <Landmark className="w-[18px] h-[18px] text-[#00e5ff]" strokeWidth={2.5}/>
+        </a>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-[#0d131cdc] hover:bg-[#121a25] transition-colors rounded-xl px-6 py-5 flex-1 border border-white/5 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group">
+          <Landmark className="w-[18px] h-[18px] text-[#00e5ff] group-hover:scale-110 transition-transform" strokeWidth={2.5}/>
           <span className="text-[14px] font-bold text-white tracking-wide">Academic Partners</span>
-        </div>
-        <div className="flex items-center justify-center gap-3 bg-[#0d131cdc] hover:bg-[#121a25] transition-colors rounded-xl px-6 py-5 flex-1 border border-white/5 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-          <Lightbulb className="w-[18px] h-[18px] text-[#00e5ff]" strokeWidth={2.5}/>
+        </a>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-[#0d131cdc] hover:bg-[#121a25] transition-colors rounded-xl px-6 py-5 flex-1 border border-white/5 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group">
+          <Lightbulb className="w-[18px] h-[18px] text-[#00e5ff] group-hover:scale-110 transition-transform" strokeWidth={2.5}/>
           <span className="text-[14px] font-bold text-white tracking-wide">Research & Innovation</span>
-        </div>
+        </a>
       </div>
 
       {/* Main Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
-        <Link href="/contact" className="flex items-center justify-center gap-2 px-8 py-4 bg-[#00e5ff] hover:bg-white text-[#050b14] font-bold rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-8 py-4 bg-[#00e5ff] hover:bg-white text-[#050b14] font-bold rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
           <MessageSquare className="w-5 h-5 flex-shrink-0" strokeWidth={2.5}/>
           <span className="tracking-wide">Contact Us</span>
-        </Link>
+        </a>
         <Link href="/training" className="flex items-center justify-center gap-2 px-8 py-4 bg-transparent hover:bg-[#00e5ff]/10 text-[#00e5ff] font-bold border border-[#00e5ff]/40 rounded-xl transition-all duration-300">
           <span className="tracking-wide">Explore Training</span>
           <ArrowRight className="w-5 h-5 flex-shrink-0" strokeWidth={2.5}/>

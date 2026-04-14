@@ -6,28 +6,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GraduationCap, School, Shield, Building2, Clock, BarChart, UserPlus } from "lucide-react";
+import { WHATSAPP_URL } from "@/constants/contact";
+import { useMobile } from "@/hooks/useMobile";
 
 // Framer motion global staggers
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (isMobile: boolean) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { 
+      staggerChildren: isMobile ? 0.05 : 0.15, 
+      delayChildren: isMobile ? 0 : 0.1 
+    }
+  })
 };
-
+ 
 const itemVariants = {
-  hidden: { opacity: 0, y: 40, filter: "blur(12px)", scale: 0.95 },
-  visible: {
+  hidden: (isMobile: boolean) => ({ 
+    opacity: 0, 
+    y: isMobile ? 20 : 40, 
+    filter: isMobile ? "blur(0px)" : "blur(12px)", 
+    scale: isMobile ? 1 : 0.95 
+  }),
+  visible: (isMobile: boolean) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" as const }
-  }
+    transition: isMobile 
+      ? { duration: 0.4, ease: "easeOut" as const }
+      : { duration: 0.5, ease: "easeOut" as const }
+  })
 };
 
 export default function TrainingPage() {
+  const isMobile = useMobile();
   const { scrollYProgress } = useScroll();
   const heroImageY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
@@ -47,10 +60,11 @@ export default function TrainingPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.15 }}
+            custom={isMobile}
             className="flex-1 flex flex-col items-start"
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-sm">
+            <motion.div custom={isMobile} variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-sm">
               <GraduationCap className="w-4 h-4 text-[#00e5ff]" />
               <span className="text-[#00e5ff] text-[12px] font-bold tracking-[0.1em] uppercase">Training & Workshops</span>
             </motion.div>
@@ -65,12 +79,14 @@ export default function TrainingPage() {
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
-              <Link 
-                href="/contact"
+              <a 
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-3.5 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] shadow-[0_0_25px_rgba(0,229,255,0.25)] hover:shadow-[0_0_35px_rgba(255,255,255,0.5)] hover:bg-white transition-all inline-flex items-center gap-2"
               >
                 Enroll Now <span className="text-[18px] leading-none mb-[2px]">→</span>
-              </Link>
+              </a>
               <a 
                 href="#programs"
                 className="px-8 py-3.5 rounded-xl border border-white/20 text-white font-bold text-[15px] hover:bg-white/5 transition-all inline-flex items-center"
@@ -275,9 +291,9 @@ export default function TrainingPage() {
             Whether you&apos;re a student, educator, or professional — our training programs are designed to equip you with real-world drone skills.
           </p>
 
-          <Link href="/contact" className="px-8 py-4 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:bg-white relative z-10 flex items-center gap-2">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-xl bg-[#00e5ff] text-[#050b14] font-bold text-[15px] transition-all shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:bg-white relative z-10 flex items-center gap-2">
             Contact Our Training Team <span>→</span>
-          </Link>
+          </a>
         </motion.div>
       </section>
 
