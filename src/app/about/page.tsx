@@ -268,10 +268,12 @@ export default function AboutPage() {
                   answer="YuDru offers a comprehensive range including Sports Drones, Monitoring Drones, Logistics Drones (5kg-100kg), Mapping Drones, and Battery/Power Systems. All our products are 100% non-Chinese and indigenously developed."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="Are your drones suitable for government and enterprise procurement?"
                   answer="Yes, all our drones are designed with industry-grade security and comply with government procurement standards. We use transparent sourcing and certified manufacturing processes."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="What is the payload capacity of your heavy-lift drones?"
                   answer="Our logistics drones range from 5kg to 100kg capacity, with modular payload systems that can be customized for delivery, disaster relief, and industrial transport applications."
                 />
@@ -283,14 +285,17 @@ export default function AboutPage() {
               <motion.h3 variants={itemVariants} className="text-[#00e5ff] font-bold text-[22px] mb-6 tracking-tight">Training & Certification</motion.h3>
               <div className="flex flex-col">
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="What training programs do you offer?"
                   answer="We offer Drone Pilot Training (8 weeks), Industrial Operations (6 weeks), and Advanced Professional training (12 weeks). Each program includes hands-on flying, safety certification, and regulatory compliance."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="Do I get a certification after training?"
                   answer="Yes, upon successful completion of our training programs, you receive industry-recognized certification. Our courses also prepare you for DGCA licensing requirements."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="Are workshops available for beginners?"
                   answer="Absolutely! Our workshops cover drone assembly, flight controllers, and battery technology, designed for all skill levels from beginners to advanced professionals."
                 />
@@ -302,14 +307,17 @@ export default function AboutPage() {
               <motion.h3 variants={itemVariants} className="text-[#00e5ff] font-bold text-[22px] mb-6 tracking-tight">Services & Support</motion.h3>
               <div className="flex flex-col">
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="Do you offer drone repair and maintenance services?"
                   answer="Yes, we provide comprehensive repair and maintenance including diagnostics, motor/ESC repair, firmware updates, calibration, and Annual Maintenance Contracts (AMC)."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="Can you build custom drones for specific requirements?"
                   answer="Yes, our Custom Drone Development service covers requirement-based design, payload customization, software tuning, and complete prototyping and testing."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="What support is available after purchase?"
                   answer="We offer technical support, maintenance services, spare parts, firmware updates, and training for all our products. Extended warranty and AMC options are also available."
                 />
@@ -321,10 +329,12 @@ export default function AboutPage() {
               <motion.h3 variants={itemVariants} className="text-[#00e5ff] font-bold text-[22px] mb-6 tracking-tight">Compliance & Safety</motion.h3>
               <div className="flex flex-col">
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="What certifications do your drones have?"
                   answer="Our products comply with ISO 9001:2015, DGCA regulations, and government procurement standards. We maintain transparent documentation for all certifications."
                 />
                 <AccordionItem 
+                  isMobile={isMobile}
                   question="How do you ensure non-Chinese components?"
                   answer="We maintain a strict, transparent supply chain with verified component sourcing. All materials are documented and auditable to ensure 100% non-Chinese manufacturing."
                 />

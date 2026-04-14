@@ -113,7 +113,7 @@ export default function ChatWidget() {
                     </div>
                     <div className="max-w-[85%] rounded-2xl p-4 text-sm bg-white/10 text-white/90 rounded-bl-sm border border-white/5 shadow-xl">
                       <p className="mb-2 font-medium bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent border-b border-white/5 pb-1">
-                        Hi 👋 I'm Yudru Assistant!
+                      Hi 👋 I&apos;m Yudru Assistant!
                       </p>
                       <div className="leading-relaxed space-y-1">
                         <p>I can help you with:</p>
@@ -146,7 +146,7 @@ export default function ChatWidget() {
                   </motion.div>
                 </div>
               ) : (
-                messages.map((m: any) => (
+                messages.map((m: { id: string; role: string; parts?: { type: string; text: string }[]; content?: string }) => (
                   <motion.div
                     key={m.id}
                     initial={{ opacity: 0, y: 10 }}
@@ -170,7 +170,7 @@ export default function ChatWidget() {
                       style={m.role === "user" ? { boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)' } : {}}
                     >
                       {m.parts
-                        ? m.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('')
+                        ? m.parts.filter((p: { type: string; text: string }) => p.type === 'text').map((p: { text: string }) => p.text).join('')
                         : (typeof m.content === 'string' ? m.content : '')}
                     </div>
                   </motion.div>

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView, useMotionValue, animate, motion } from "framer-motion";
-import { Cpu, Users, Zap, Shield } from "lucide-react";
+import { Cpu, Users, Zap, Shield, type LucideIcon } from "lucide-react";
+import { useMobile } from "@/hooks/useMobile";
 
 const itemVariants = {
   hidden: (isMobile: boolean) => ({ 
@@ -15,23 +16,21 @@ const itemVariants = {
     y: 0, 
     scale: 1,
     transition: isMobile 
-      ? { duration: 0.4, ease: "easeOut" as any, staggerChildren: 0.05 }
-      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any } 
+      ? { duration: 0.4, ease: "easeOut", staggerChildren: 0.05 }
+      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
   })
 };
 
-function useMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handler = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-  return isMobile;
+
+interface CounterProps {
+  value: number;
+  suffix?: string;
+  label: string;
+  icon: LucideIcon;
+  isMobile: boolean;
 }
 
-function Counter({ value, suffix = "", label, icon: Icon, isMobile }: any) {
+function Counter({ value, suffix = "", label, icon: Icon, isMobile }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   

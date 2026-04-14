@@ -5,7 +5,7 @@ export function useMobile() {
 
   useEffect(() => {
     // Initial check
-    setIsMobile(window.innerWidth < 1024);
+    setIsMobile(window.innerWidth < 1024); // eslint-disable-line react-hooks/set-state-in-effect
 
     const handler = () => {
       setIsMobile(window.innerWidth < 1024);

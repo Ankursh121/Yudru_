@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Beaker, GraduationCap, Settings, Plane, ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useMobile } from "@/hooks/useMobile";
 
@@ -42,8 +42,8 @@ const itemVariants = {
     y: 0, 
     scale: 1,
     transition: isMobile 
-      ? { duration: 0.4, ease: "easeOut" as any }
-      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any } 
+      ? { duration: 0.4, ease: "easeOut" }
+      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
   })
 };
 

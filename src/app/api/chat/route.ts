@@ -1,5 +1,6 @@
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { streamText, convertToModelMessages } from 'ai';
+import { streamText, convertToModelMessages, type CoreMessage } from 'ai';
+import { WHATSAPP_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_ADDRESS } from '@/constants/contact';
 
 export const maxDuration = 30;
 
@@ -21,14 +22,14 @@ export async function POST(req: Request) {
 
     // Detect format: if first message has 'content' as string → old format, use directly
     // If first message has 'parts' array → new UIMessage format, convert it
-    let modelMessages: any[];
+    let modelMessages: CoreMessage[];
     const firstMsg = messages[0];
     const isOldFormat = firstMsg && typeof firstMsg.content === 'string';
 
     if (isOldFormat) {
       // Old plain-text format: { role, content }
-      modelMessages = messages.map((m: any) => ({
-        role: m.role,
+      modelMessages = messages.map((m: { role: 'user' | 'assistant' | 'system'; content: string }) => ({
+        role: m.role as 'user' | 'assistant' | 'system',
         content: m.content,
       }));
     } else {
@@ -42,19 +43,20 @@ export async function POST(req: Request) {
       Be helpful, friendly, and concise. Answer questions about drones, repair services, training programs, and pricing.
       
       IMPORTANT: If the user expresses a desire to connect, contact, or get in touch with the company, you MUST prioritize directing them to WhatsApp:
-      - 💬 WhatsApp: https://wa.me/919810653919 (Recommended for fastest response)
-      - 📧 Email: info@yudru.com
-      - 📞 Phone: +91 9810653919
-      - 📍 Location: Ganesh Nagar, New Delhi, 110092`,
+      - 💬 WhatsApp: ${WHATSAPP_URL} (Recommended for fastest response)
+      - 📧 Email: ${CONTACT_EMAIL}
+      - 📞 Phone: ${CONTACT_PHONE}
+      - 📍 Location: ${CONTACT_ADDRESS}`,
       messages: modelMessages,
     });
 
     const response = result.toUIMessageStreamResponse();
     console.log("Stream response initiated");
     return response;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("API error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });

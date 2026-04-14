@@ -2,9 +2,8 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { WHATSAPP_URL } from "@/constants/contact";
+import { WHATSAPP_URL, CONTACT_PHONE, CONTACT_EMAIL, CONTACT_ADDRESS } from "@/constants/contact";
 import { useMobile } from "@/hooks/useMobile";
 import { 
   Wrench, PhoneCall, ShieldCheck, Clock, CheckCircle2, 
@@ -88,7 +87,7 @@ export default function RepairPage() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <a 
-                  href="tel:9810653919"
+                  href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}
                   className="px-8 py-3.5 rounded-xl border border-white/20 text-white font-bold text-[15px] hover:bg-white/5 transition-all inline-flex items-center gap-2"
                 >
                   <PhoneCall className="w-4 h-4" /> Call Now
@@ -293,17 +292,17 @@ export default function RepairPage() {
             </p>
 
             <div className="flex flex-col space-y-4 w-full">
-              <a href="tel:9810653919" className="flex items-center gap-3 text-white/90 hover:text-[#00e5ff] transition-colors group w-fit">
+              <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} className="flex items-center gap-3 text-white/90 hover:text-[#00e5ff] transition-colors group w-fit">
                 <PhoneCall className="w-4 h-4 text-[#00e5ff]" />
-                <span className="font-bold tracking-wide">+91 9810653919</span>
+                <span className="font-bold tracking-wide">{CONTACT_PHONE}</span>
               </a>
-              <a href="mailto:repair@yudru.com" className="flex items-center gap-3 text-white/90 hover:text-[#00e5ff] transition-colors group w-fit">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-3 text-white/90 hover:text-[#00e5ff] transition-colors group w-fit">
                 <Mail className="w-4 h-4 text-[#00e5ff]" />
-                <span className="font-medium">repair@yudru.com</span>
+                <span className="font-medium">{CONTACT_EMAIL}</span>
               </a>
               <div className="flex items-center gap-3 text-white/70">
                 <MapPin className="w-4 h-4 text-[#00e5ff]" />
-                <span className="font-medium">Yudru Technologies, Delhi, India</span>
+                <span className="font-medium">{CONTACT_ADDRESS}</span>
               </div>
             </div>
           </div>

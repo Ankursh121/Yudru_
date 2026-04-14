@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useMotionValueEvent, AnimatePresence, motion } from "framer-motion";
+import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const FRAME_COUNT = 240; // Full 240 frame sequence restored
 
@@ -15,7 +15,6 @@ export default function ScrollCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [loadedCount, setLoadedCount] = useState(0);
 
   // Create a transform that maps scroll 0-1 to frame index 1-240
   const frameIndex = useTransform(scrollYProgress, [0, 1], [1, FRAME_COUNT]);
@@ -30,10 +29,6 @@ export default function ScrollCanvas() {
       img.src = `/4k_frames/ezgif-frame-${pad(i, 3)}.jpg`;
       const handleLoad = () => {
         localCount++;
-        // Throttle state updates for performance
-        if (localCount % 10 === 0 || localCount === FRAME_COUNT) {
-          setLoadedCount(localCount);
-        }
         // If first image is loaded, draw it to initialize canvas
         if (i === 1) {
           drawFrame(1, loadedImages);
@@ -77,19 +72,12 @@ export default function ScrollCanvas() {
     const imgRatio = img.width / img.height;
     const windowRatio = cw / ch;
 
-    let drawW, drawH, drawX, drawY;
-
     // Ultra-High Quality PNGs can safely be scaled to cover the entire viewport without pixelation
-    if (windowRatio > imgRatio) {
-      drawW = cw;
-      drawH = img.height * (cw / img.width);
-    } else {
-      drawH = ch;
-      drawW = img.width * (ch / img.height);
-    }
+    const drawW = windowRatio > imgRatio ? cw : img.width * (ch / img.height);
+    const drawH = windowRatio > imgRatio ? img.height * (cw / img.width) : ch;
 
-    drawX = (cw - drawW) / 2;
-    drawY = (ch - drawH) / 2;
+    const drawX = (cw - drawW) / 2;
+    const drawY = (ch - drawH) / 2;
 
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
   };
