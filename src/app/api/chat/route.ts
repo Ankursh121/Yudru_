@@ -1,5 +1,5 @@
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { streamText, convertToModelMessages, type ModelMessage } from 'ai';
+import { streamText, convertToModelMessages } from 'ai';
 import { WHATSAPP_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_ADDRESS } from '@/constants/contact';
 
 export const maxDuration = 30;
@@ -22,14 +22,14 @@ export async function POST(req: Request) {
 
     // Detect format: if first message has 'content' as string → old format, use directly
     // If first message has 'parts' array → new UIMessage format, convert it
-    let modelMessages: ModelMessage[];
+    let modelMessages: any[];
     const firstMsg = messages[0];
     const isOldFormat = firstMsg && typeof firstMsg.content === 'string';
 
     if (isOldFormat) {
       // Old plain-text format: { role, content }
-      modelMessages = messages.map((m: { role: 'user' | 'assistant' | 'system'; content: string }) => ({
-        role: m.role as 'user' | 'assistant' | 'system',
+      modelMessages = messages.map((m: any) => ({
+        role: m.role,
         content: m.content,
       }));
     } else {

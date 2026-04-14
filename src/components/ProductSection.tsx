@@ -42,8 +42,8 @@ const itemVariants = {
     filter: "blur(0px)",
     scale: 1,
     transition: isMobile 
-      ? { duration: 0.5, ease: "easeOut" }
-      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+      ? { duration: 0.5, ease: "easeOut" as const }
+      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
   })
 };
 
@@ -60,8 +60,8 @@ const imageVariants = {
     filter: "blur(0px)",
     rotateX: 0,
     transition: isMobile
-      ? { duration: 0.6, ease: "easeOut" }
-      : { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
+      ? { duration: 0.6, ease: "easeOut" as const }
+      : { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }
   })
 };
 

@@ -16,8 +16,8 @@ const itemVariants = {
     y: 0, 
     scale: 1,
     transition: isMobile 
-      ? { duration: 0.4, ease: "easeOut", staggerChildren: 0.05 }
-      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
+      ? { duration: 0.4, ease: "easeOut" as const, staggerChildren: 0.05 }
+      : { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } 
   })
 };
 

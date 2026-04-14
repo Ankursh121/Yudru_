@@ -146,7 +146,7 @@ export default function ChatWidget() {
                   </motion.div>
                 </div>
               ) : (
-                messages.map((m: { id: string; role: string; parts?: { type: string; text: string }[]; content?: string }) => (
+                messages.map((m: any) => (
                   <motion.div
                     key={m.id}
                     initial={{ opacity: 0, y: 10 }}
@@ -170,7 +170,7 @@ export default function ChatWidget() {
                       style={m.role === "user" ? { boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)' } : {}}
                     >
                       {m.parts
-                        ? m.parts.filter((p: { type: string; text: string }) => p.type === 'text').map((p: { text: string }) => p.text).join('')
+                        ? m.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('')
                         : (typeof m.content === 'string' ? m.content : '')}
                     </div>
                   </motion.div>
