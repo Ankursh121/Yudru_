@@ -13,7 +13,7 @@ export default function CTASection() {
       </h2>
       
       <p className="text-zinc-100 text-[17px] leading-relaxed text-center max-w-3xl mx-auto mb-16 relative z-10 font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] bg-black/10 px-8 py-3 rounded-full backdrop-blur-[2px]">
-        Whether you're an enterprise, research organization, or academic institution,
+        Whether you&apos;re an enterprise, research organization, or academic institution,
         we&apos;re here to deliver tailored drone solutions for your needs.
       </p>
 

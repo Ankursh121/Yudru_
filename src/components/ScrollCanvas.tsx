@@ -22,13 +22,11 @@ export default function ScrollCanvas() {
   useEffect(() => {
     // Preload images
     const loadedImages: HTMLImageElement[] = [];
-    let localCount = 0;
 
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       img.src = `/4k_frames/ezgif-frame-${pad(i, 3)}.jpg`;
       const handleLoad = () => {
-        localCount++;
         // If first image is loaded, draw it to initialize canvas
         if (i === 1) {
           drawFrame(1, loadedImages);
