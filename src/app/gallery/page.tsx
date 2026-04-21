@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useAnimationFrame } from "framer-motion";
 
 const categories = ["All", "Drones", "Components", "Training", "Labs", "Events"];
 
@@ -27,7 +27,28 @@ const rawImages = [
   { src: "photo_2026-04-11_17-32-21.jpg", title: "Circuit Integration Workshop", category: "Training" },
   { src: "photo_2026-04-11_17-32-22.jpg", title: "Aviation Principles Lecture", category: "Training" },
   { src: "photo_2026-04-11_17-32-24.jpg", title: "Youth Tech Initiative", category: "Events" },
-  { src: "photo_2026-04-11_17-32-25.jpg", title: "Engineering Outreach Panel", category: "Events" }
+  { src: "photo_2026-04-11_17-32-25.jpg", title: "Engineering Outreach Panel", category: "Events" },
+  // New uploads
+  { src: "new1.jpg", title: "Precision UAV Deployment", category: "Drones" },
+  { src: "new2.jpg", title: "Field Operations Briefing", category: "Events" },
+  { src: "new3.jpg", title: "Drone Calibration Session", category: "Labs" },
+  { src: "new4.jpg", title: "Aerial Survey Mission", category: "Drones" },
+  { src: "new5.jpg", title: "Propulsion System Testing", category: "Labs" },
+  { src: "new6.jpg", title: "Advanced Pilot Training", category: "Training" },
+  { src: "new7.jpg", title: "Competition Drone Build", category: "Components" },
+  { src: "new8.jpg", title: "Night Flight Operations", category: "Drones" },
+  { src: "new9.jpg", title: "Sensor Payload Integration", category: "Components" },
+  { src: "new10.jpg", title: "Community Outreach Workshop", category: "Events" },
+  { src: "new11.jpg", title: "Research & Development Lab", category: "Labs" },
+  { src: "new12.jpg", title: "Navigation Systems Demo", category: "Training" },
+  { src: "new13.jpg", title: "Multi-Rotor Stress Test", category: "Drones" },
+  { src: "new14.jpg", title: "Electronics Prototyping Bay", category: "Labs" },
+  { src: "new15.jpg", title: "Inaugural Flight Ceremony", category: "Events" },
+  { src: "new16.jpg", title: "Frame Manufacturing Process", category: "Components" },
+  { src: "new17.jpg", title: "Hands-On Build Challenge", category: "Training" },
+  { src: "new18.jpg", title: "Long-Range Telemetry Test", category: "Drones" },
+  { src: "new19.jpg", title: "Youth Innovation Summit", category: "Events" },
+  { src: "new20.jpg", title: "Motor & ESC Bench Test", category: "Components" },
 ];
 
 const galleryItems = rawImages.map((item) => ({
@@ -39,6 +60,62 @@ const galleryItems = rawImages.map((item) => ({
 
 export default function GalleryPage() {
   const [activeTab, setActiveTab] = useState("All");
+
+  // ── Carousel scroll state ──────────────────────────────────────────────
+  const carouselTrackRef = useRef<HTMLDivElement>(null);
+  const xPos = useMotionValue(0);
+  const isPaused = useRef(false);
+  const halfWidth = useRef(0);
+
+  // Reset position & cached width when returning to the "All" tab
+  useEffect(() => {
+    if (activeTab === "All") {
+      halfWidth.current = 0;
+      xPos.set(0);
+    }
+  }, [activeTab]);
+
+  // Auto-scroll — measures lazily so it adapts to any number of items
+  useAnimationFrame((_, delta) => {
+    if (isPaused.current || !carouselTrackRef.current) return;
+    if (!halfWidth.current) {
+      halfWidth.current = carouselTrackRef.current.scrollWidth / 2;
+    }
+    let next = xPos.get() - delta * 0.045;
+    if (next <= -halfWidth.current) next += halfWidth.current;
+    xPos.set(next);
+  });
+
+  // Pointer drag handler — click-and-hold to scroll images
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartXPos = useRef(0);
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    isDragging.current = true;
+    isPaused.current = true;
+    dragStartX.current = e.clientX;
+    dragStartXPos.current = xPos.get();
+    e.currentTarget.setPointerCapture(e.pointerId); // keep dragging outside bounds
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging.current) return;
+    const delta = e.clientX - dragStartX.current;
+    const half = halfWidth.current;
+    if (!half) return;
+    let next = dragStartXPos.current + delta;
+    while (next <= -half) next += half;
+    while (next > 0) next -= half;
+    xPos.set(next);
+  };
+
+  const handlePointerUp = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    isPaused.current = false;
+  };
+  // ──────────────────────────────────────────────────────────────────────
 
   const filteredItems = activeTab === "All" 
     ? galleryItems 
@@ -115,19 +192,19 @@ export default function GalleryPage() {
 
         {/* Layout Engine: Carousel for 'All', Masonry for Filters */}
         {activeTab === "All" ? (
-          <div className="w-full relative py-8 overflow-hidden group">
+          <div
+            className="w-full relative py-8 overflow-hidden group select-none cursor-grab active:cursor-grabbing"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
+          >
             {/* Infinite Horizontal Carousel */}
             {filteredItems.length > 0 ? (
               <motion.div
+                ref={carouselTrackRef}
                 className="flex gap-4 sm:gap-6 w-max"
-                animate={{ 
-                  x: ["0%", "-50%"]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  ease: "linear",
-                  duration: Math.max(25, filteredItems.length * 12),
-                }}
+                style={{ x: xPos }}
               >
                 {[...filteredItems, ...filteredItems].map((item, i) => (
                   <div
