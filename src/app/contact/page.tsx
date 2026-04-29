@@ -42,7 +42,7 @@ export default function ContactPage() {
             </div>
             <div className="flex flex-col">
               <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">Phone</span>
-              <a href="tel:+919810653919" className="text-white font-bold text-sm tracking-wide hover:text-[#00e5ff] transition-colors">+91 9810653919</a>
+              <a href="tel:+918178422103" className="text-white font-bold text-sm tracking-wide hover:text-[#00e5ff] transition-colors">+91 8178422103</a>
             </div>
           </div>
 

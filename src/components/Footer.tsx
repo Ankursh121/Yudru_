@@ -66,9 +66,9 @@ export default function Footer() {
                 <Mail className="w-[18px] h-[18px] group-hover:-translate-y-0.5 transition-transform" />
                 <span>info@yudru.com</span>
               </a>
-              <a href="tel:+919810653919" className="flex items-center gap-3 text-[#00e5ff] hover:text-white transition-colors text-[15px] font-medium group">
+              <a href="tel:+918178422103" className="flex items-center gap-3 text-[#00e5ff] hover:text-white transition-colors text-[15px] font-medium group">
                 <Phone className="w-[18px] h-[18px] group-hover:-translate-y-0.5 transition-transform" />
-                <span>+91 9810653919</span>
+                <span>+91 8178422103</span>
               </a>
               <div className="flex items-start gap-3 text-[#8e9bb0] text-[15px] font-medium mt-1">
                 <MapPin className="w-[18px] h-[18px] text-[#00e5ff] shrink-0 mt-0.5" />
